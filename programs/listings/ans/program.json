@@ -1,0 +1,20 @@
+{
+  "program": "zmarket_ans_listing.aleo",
+  "version": "0.0.0",
+  "description": "",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "name": "aleo_name_service_registry_v4.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../../ans-programs/programs/registry/"
+    },
+    {
+      "name": "zmarket_marketplace_volume.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../utils/volume/"
+    }
+  ]
+}
