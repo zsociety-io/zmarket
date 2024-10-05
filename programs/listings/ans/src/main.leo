@@ -18,7 +18,8 @@ program zmarket_ans_listing.aleo {
         nft_commit: field,
         price: u64,
         name_hash: field,
-        is_public: bool
+        is_private: bool,
+        is_live: bool
     }
 
 
@@ -32,20 +33,14 @@ program zmarket_ans_listing.aleo {
     }
 
 
-    mapping public_listings: field => PublicListingData;
-    // listing_id => public_listing_data;
-
-    mapping private_listings: field => PrivateListingData;
-    // listing_id => private_listing_data;
-
-    mapping commit_to_data: field => data;
-    // listing_id => data;
-
+    mapping listings: field => ListingData;
+    // listing_id => listing_data;
 
 
     async transition list_private(
         nft: aleo_name_service_registry_v4.aleo/NFT,
-        public price: u64 // total price paid by seller
+        public price: u64, // total price paid by seller
+        public listing_id: field
     ) -> (PrivateListing, Future) {
         let (nft_view, transfer_future): (
             aleo_name_service_registry_v4.aleo/NFTView, Future
@@ -55,36 +50,40 @@ program zmarket_ans_listing.aleo {
         let nft_commit: field = commit_nft(nft.data, nft.edition);
         let private_listing: PrivateListing = PrivateListing {
             owner: self.signer,
-            nft_commit: nft_commit,
-            price: price
+            listing_id: listing_id
         };
         let list_private_future: Future = finalize_list_private(
+            listing_id,
             nft_commit,
             price,
-            nft_data.metadata[0],
+            nft.data.metadata[0u8],
             transfer_future
         );
         return (
             private_listing,
-            future,
+            list_private_future,
         );
     }
     async function finalize_list_private(
+        listing_id: field,
         nft_commit: field,
-        price: bool,
+        price: u64,
         name_hash: field,
         transfer_future: Future
     ){
-        let private_listing_data: PrivateListingData = PrivateListingData{
+        assert(listings.contains(listing_id).not());
+        let listing_data: ListingData = ListingData {
             nft_commit: nft_commit,
             price: price,
-            name_hash: name_hash
+            name_hash: name_hash,
+            is_private: true,
+            is_live: true
         };
-        private_listings.set(nft_commit, private_listing_data);
+        listings.set(listing_id, listing_data);
         transfer_future.await();
     }
 
-
+    
     async transition unlist_private(
         private_listing: PrivateListing,
         public name_hash: field,
@@ -96,37 +95,44 @@ program zmarket_ans_listing.aleo {
         let (nft, transfer_future): (
             aleo_name_service_registry_v4.aleo/NFT, Future
         ) = aleo_name_service_registry_v4.aleo/transfer_public_to_private(
-                nft_data, nft_edition, self.address
-            );
+            nft_data, nft_edition, self.signer
+        );
         let nft_commit: field = commit_nft(nft_data, nft_edition);
-        assert_eq(private_listing.nft_commit, );
 
         let list_private_future: Future = finalize_unlist_private(
+            private_listing.listing_id,
             nft_commit,
-            price,
             transfer_future
         );
         return (
             nft,
-            future,
+            list_private_future,
         );
     }
     async function finalize_unlist_private(
+        listing_id: field,
         nft_commit: field,
-        price: bool,
         transfer_future: Future
     ){
-        let private_listing_data: PrivateListingData = PrivateListingData{
-            nft_commit: nft_commit,
-            price: price,
-        };
-        private_listings.set(nft_commit, private_listing_data);
+        let listing_data: ListingData = listings.get(listing_id);
+        assert(listing_data.is_live);
+        assert(listing_data.is_private);
+        assert_eq(nft_commit, listing_data.nft_commit);
+        let new_listing_data: ListingData = ListingData {
+            nft_commit: listing_data.nft_commit,
+            price: listing_data.price,
+            name_hash: listing_data.name_hash,
+            is_private: listing_data.is_private,
+            is_live: false
+        }; 
+        listings.set(listing_id, new_listing_data);
         transfer_future.await();
     }
 
+    /*
     async function list_public() {
         return ;
     }
-
+    */
 
 }

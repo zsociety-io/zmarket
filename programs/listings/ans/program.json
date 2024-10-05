@@ -8,7 +8,7 @@
       "name": "aleo_name_service_registry_v4.aleo",
       "location": "local",
       "network": null,
-      "path": "../../../ans-programs/programs/registry/"
+      "path": "../../../../ans-programs/programs/registry/"
     },
     {
       "name": "zmarket_marketplace_volume.aleo",
