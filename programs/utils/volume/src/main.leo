@@ -1,21 +1,21 @@
 
-program zmarket_marketplace_volume.aleo {
+program zmarket_marketplace.aleo {
     struct VolumeKey {
         account: address, // account who made the volume
-        marketplace: address, // marketplace program where volume was made
+        listing: address, // listing program where volume was made
         side: bool, // sell: true, buy: false
     }
     
     struct VolumeData {
         account: address, // account who made the volume
-        marketplace: address, // marketplace program where volume was made
+        listing: address, // listing program where volume was made
         side: bool, // sell: true, buy: false
         amount: u64 // amount of volume
     }
 
-    record VolumeProof {
+    record Volume {
         owner: address, // account who made the volume
-        marketplace: address, // marketplace program where volume was made
+        listing: address, // listing program where volume was made
         side: bool, // sell: true, buy: false
         amount: u64 // amount of volume
     }
@@ -31,76 +31,76 @@ program zmarket_marketplace_volume.aleo {
 
 
     transition add_volume(
-        volume_proof: VolumeProof,
-        side: bool,
+        volume: Volume,
         amount: u64
-    ) -> VolumeProof {
-        return VolumeProof {
+    ) -> Volume {
+        assert_eq(volume.listing, self.caller);
+        return Volume {
             owner: self.signer,
-            marketplace: self.caller,
-            side: side,
-            amount: amount
+            listing: self.caller,
+            side: volume.side,
+            amount: volume.amount + amount
         };
     }
 
 
-    transition mint_volume_proof(
+    transition mint_volume(
         side: bool, 
-        marketplace: address,
-    ) -> VolumeProof {
-        return VolumeProof{
+        listing: address,
+    ) -> Volume {
+        return Volume{
             owner: self.signer,
-            marketplace: marketplace,
+            listing: listing,
             side: side,
             amount: 0u64
         };
     }
 
 
-    transition join_volume_proofs(
-        proof0: VolumeProof, proof1: VolumeProof
-    ) -> VolumeProof{
-        assert_eq(proof0.side, proof1.side);
-        assert_eq(proof0.marketplace, proof1.marketplace);
-        return VolumeProof{
+    transition join_volumes(
+        volume0: Volume, volume1: Volume
+    ) -> Volume{
+        assert_eq(volume0.side, volume1.side);
+        assert_eq(volume0.listing, volume1.listing);
+        return Volume{
             owner: self.signer,
-            marketplace: proof0.marketplace,
-            side: proof0.side,
-            amount: proof0.amount + proof1.amount
+            listing: volume0.listing,
+            side: volume0.side,
+            amount: volume0.amount + volume1.amount
         };
     }
 
 
     async transition share_volume(
-        private volume_proof: VolumeProof
-    ) -> (VolumeProof, Future){
-        let out_volume_proof: VolumeProof = VolumeProof {
-            owner: volume_proof.owner,
-            marketplace: volume_proof.marketplace,
-            side: volume_proof.side,
-            amount: volume_proof.amount
+        private volume: Volume
+    ) -> (Volume, Future){
+        let out_volume: Volume = Volume {
+            owner: volume.owner,
+            listing: volume.listing,
+            side: volume.side,
+            amount: volume.amount
         };
         let share_volume_future: Future = set_volume(
             self.signer,
-            volume_proof.marketplace,
-            volume_proof.side,
-            volume_proof.amount
+            volume.listing,
+            volume.side,
+            volume.amount
         );
         return (
-            out_volume_proof,
+            out_volume,
             share_volume_future
         );
     }
 
     async function set_volume(
         account: address,
-        marketplace: address,
+        listing: address,
         side: bool,
         amount: u64
     ){
         let volume_key: VolumeKey = VolumeKey {
             account: account,
-            marketplace: marketplace,
+            listing: listing,
             side: side,
         };
         let volume_key_hash: field = BHP256::hash_to_field(volume_key);
@@ -109,7 +109,7 @@ program zmarket_marketplace_volume.aleo {
 
         let new_volume_data: VolumeData = VolumeData {
             account: account,
-            marketplace: marketplace,
+            listing: listing,
             side: side,
             amount: max_u64(amount, old_volume_data.amount)
         };

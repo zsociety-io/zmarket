@@ -1,0 +1,6 @@
+[[package]]
+name = "ans_authority.aleo"
+location = "local"
+path = "/home/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../utils/ans_listing_royalty/../ans_authority"
+checksum = "a2baf57b98ddbdc32681d53ee82f4034e836b9213197598a371db5f88317241b"
+dependencies = []

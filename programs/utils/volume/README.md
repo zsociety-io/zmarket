@@ -1,4 +1,4 @@
-# zmarket_marketplace_volume.aleo
+# zmarket_marketplace.aleo
 
 ## Build Guide
 
