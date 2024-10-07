@@ -1,4 +1,4 @@
-program zmarket_marketplace_volume.aleo;
+program zmarket_marketplace.aleo;
 
 struct VolumeKey:
     account as address;
@@ -55,7 +55,7 @@ function share_volume:
     cast r0.owner r0.marketplace r0.side r0.amount into r1 as VolumeProof.record;
     async share_volume self.signer r0.marketplace r0.side r0.amount into r2;
     output r1 as VolumeProof.record;
-    output r2 as zmarket_marketplace_volume.aleo/share_volume.future;
+    output r2 as zmarket_marketplace.aleo/share_volume.future;
 
 finalize share_volume:
     input r0 as address.public;

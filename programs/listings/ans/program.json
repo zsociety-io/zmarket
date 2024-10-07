@@ -11,10 +11,28 @@
       "path": "../../../../ans-programs/programs/registry/"
     },
     {
-      "name": "zmarket_marketplace_volume.aleo",
+      "name": "zmarket_marketplace.aleo",
       "location": "local",
       "network": null,
       "path": "../../utils/volume/"
+    },
+    {
+      "name": "ans_listing_royalty.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../utils/ans_listing_royalty"
+    },
+    {
+      "name": "zmarket_royalty.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../utils/zmarket_royalty"
+    },
+    {
+      "name": "credits.aleo",
+      "location": "network",
+      "network": "testnet",
+      "path": null
     }
   ]
 }
