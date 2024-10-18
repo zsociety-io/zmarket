@@ -14,7 +14,7 @@
       "name": "zmarket_marketplace.aleo",
       "location": "local",
       "network": null,
-      "path": "../../utils/volume/"
+      "path": "../../marketplace/"
     },
     {
       "name": "ans_listing_royalty.aleo",
