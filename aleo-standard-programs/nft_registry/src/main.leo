@@ -1,13 +1,21 @@
 /*
 
-    NFTs with public/private data and public/private owner.
+    Collection registry for NFTs with public/private data and public/private owner.
 
 */
 
 
 program nft_registry.aleo {
-    struct DefaultData {
-        metadata: [field; 4] // URL of offchain metadata JSON
+    struct CollectionMetadata {
+        collection_id: field,
+        name: u128, // ASCII text represented in bits, and the u128 value of the bitstring
+        symbol: u128, // ASCII text represented in bits, and the u128 value of the bitstring
+        supply: u128,
+        base_uri: [4; field],
+        max_supply: u128,
+        admin: address,
+        external_authorization_required: bool, // whether or not this token requires authorization from an external program before transferring
+        external_authorization_party: address
     }
 
     struct approval {
@@ -18,23 +26,20 @@ program nft_registry.aleo {
 
     record NFT {
         private owner: address,
-        private data_hash: field,
+        private data: field,
         private edition: scalar,
         private collection_id: field,
         private external_authorization_required: bool,
         private authorized_until: u32
     }
 
-    record NFTView {
-        private owner: address,
-        private data: DefaultData,
-        private edition: scalar,
-        public is_view: bool
+    struct NftId {
+        collection_id: field,
+        nft_commit: field
     }
 
-
-    mapping nft_commits: field => bool; 
-    // NFT commit => NFT exists or has existed
+    mapping nft_exists: field => NftId; 
+    // hash(NftId) => NftId
 
     mapping nft_owners: field => address;
     // NFT commit => NFT owner
@@ -45,6 +50,9 @@ program nft_registry.aleo {
     mapping nft_approvals: field => field; 
     // NFT commit => Approval hash
 
+    mapping registered_collections: field => CollectionMetadata;
+    // Collection ID => Collection Metadata
+
 
     inline commit_nft(
         nft_data: data,
@@ -53,6 +61,36 @@ program nft_registry.aleo {
         let data_hash: field = BHP256::hash_to_field(nft_data);
         let commitment: field = BHP256::commit_to_field(data_hash, nft_edition);
         return commitment;
+    }
+        
+
+    async transition register_collection(
+        public collection_id: field,
+        public name: u128,
+        public symbol: u128,
+        public decimals: u8,
+        public base_uri: [4; field],
+        public max_supply: u128,
+        public external_authorization_required: bool,
+        public external_authorization_party: address
+    ) -> Future {
+        let collection: CollectionMetadata = CollectionMetadata {
+            collection_id: collection_id,
+            name: name,
+            symbol: symbol,
+            supply: 0u128,
+            max_supply: max_supply,
+            admin: self.caller,
+            external_authorization_required: external_authorization_required,
+            external_authorization_party: external_authorization_party
+        };
+
+        return finalize_register_collection(collection);
+    }
+    async function finalize_register_collection(collection: CollectionMetadata) {
+        let collection_exists: bool = registered_collections.contains(token.token_id);
+        assert(collection_exists.not());
+        registered_collections.set(collection.collection_id, collection);
     }
 
 

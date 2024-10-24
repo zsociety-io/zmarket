@@ -93,7 +93,7 @@ program zmarket_marketplace.aleo {
         royalty_permyriad: u16
     ){
         assert(royalties.contains(self.address).not());
-        assert(royalty_permyriad <= 10000u16);
+        assert(royalty_permyriad <= 10_000u16);
         royalties.set(self.address, royalty_permyriad);
     }
 
