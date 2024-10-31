@@ -8,12 +8,6 @@ program zsociety_token_v3.aleo {
     const PRECISION: u128 = 1_000_000u128;
     const SUPPLY: u128 = 1_000_000_000_000u128;
 
-    record HolderState {
-        owner: address,
-        share_permyriad: u8,
-        total_income: u128,
-        last_total: u128,
-    }
 
     record PublicIncome {
         owner: address,

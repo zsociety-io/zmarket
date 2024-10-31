@@ -1,6 +1,0 @@
-[[package]]
-name = "zmarket_authority.aleo"
-location = "local"
-path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../utils/zmarket_royalty/../zmarket_authority"
-checksum = "4863a50dfbdd4d4ac838e1d3a3fdd58554c7691eb4911dc641e099308b2fb017"
-dependencies = []

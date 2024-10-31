@@ -7,7 +7,8 @@ program zmarket_marketplace.aleo {
         metadata: [field; 4]
     }
 
-    record Royalty {
+    // Royalty NFT
+    record NFT {
         owner: address,
         data: data,
         edition: scalar
@@ -39,12 +40,12 @@ program zmarket_marketplace.aleo {
 
     record PrivateListing {
         owner: address,
-        listing_id: field
+        listing_id: field,
     }
 
     record PrivateOffer {
         owner: address,
-        nft_commit: field
+        offer_id: field
     }
 
     record Volume {
@@ -74,13 +75,13 @@ program zmarket_marketplace.aleo {
 
     async transition initialize_marketplace(
         public royalty_permyriad: u16
-    ) -> (Royalty, Future){
+    ) -> (NFT, Future){
         let initialize_marketplace_future: Future
             = finalize_initialize_marketplace(
                 royalty_permyriad
             );
         assert_eq(self.caller, MARKETPLACE_ROYALTY_INITIAL_OWNER);
-        let out_royalty: Royalty = Royalty {
+        let out_royalty: NFT = NFT {
             owner: self.signer,
             data: data {
                 metadata: [self.address as field, 0field, 0field, 0field]
@@ -100,9 +101,9 @@ program zmarket_marketplace.aleo {
 
     async transition list_collection(
         private royalty_holder: address, public royalty_permyriad: u16
-    ) -> (Royalty, Future){
+    ) -> (NFT, Future){
         let listing_program: address = self.caller;
-        let out_royalty: Royalty = Royalty {
+        let out_royalty: NFT = NFT {
             owner: royalty_holder,
             data: data {
                 metadata: [listing_program as field, 0field, 0field, 0field]
@@ -125,14 +126,14 @@ program zmarket_marketplace.aleo {
 
 
     async transition update_royalty(
-        old_royalty: Royalty,
+        old_royalty: NFT,
         public new_royalty_permyriad: u16
-    ) -> (Royalty, Future){
+    ) -> (NFT, Future){
         let update_royalty_future: Future = finalize_update_royalty(
             old_royalty.data.metadata[0u16] as address,
             new_royalty_permyriad,
         );
-        let new_royalty: Royalty = Royalty {
+        let new_royalty: NFT = NFT {
             owner: old_royalty.owner,
             data: old_royalty.data,
             edition: old_royalty.edition
@@ -148,14 +149,14 @@ program zmarket_marketplace.aleo {
 
 
     async transition withdraw_royalty_balance(
-        old_royalty: Royalty,
+        old_royalty: NFT,
         public amount: u64
-    ) -> (Royalty, Future){
+    ) -> (NFT, Future){
         let withdraw_royalty_balance_future: Future = finalize_withdraw_royalty_balance(
             old_royalty.data.metadata[0u16] as address,
             amount,
         );
-        let new_royalty: Royalty = Royalty {
+        let new_royalty: NFT = NFT {
             owner: old_royalty.owner,
             data: old_royalty.data,
             edition: old_royalty.edition
@@ -204,8 +205,8 @@ program zmarket_marketplace.aleo {
         let market_royalty: u16 = royalties.get(self.address);
         let creator_royalty: u16 = royalties.get(listing_program);
 
-        let market_royalty_amount: u64 = ((market_royalty as u64) * price).div(10000u64);
-        let creator_royalty_amount: u64 = ((creator_royalty as u64) * price).div(10000u64);
+        let market_royalty_amount: u64 = ((market_royalty as u64) * price).div(10_000u64);
+        let creator_royalty_amount: u64 = ((creator_royalty as u64) * price).div(10_000u64);
 
         assert(price >= market_royalty_amount + creator_royalty_amount);
         
@@ -419,13 +420,12 @@ program zmarket_marketplace.aleo {
         assert(listing_data.is_removed.not());
         assert_eq(price, listing_data.price);
 
-        let market_royalty: Share =
+        let market_royal00030ty: S hare =
             zmarket_royalty.aleo/royalties.get(listing_data.market_royalty_index);
         let creator_royalty: Share =
             ans_listing_royalty.aleo/royalties.get(listing_data.creator_royalty_index);
         assert_eq(market_royalty_permyriad, market_royalty.permyriad);
         assert_eq(creator_royalty_permyriad, creator_royalty.permyriad);
-
 
 
         let new_listing_data: ListingData = ListingData {
@@ -443,22 +443,8 @@ program zmarket_marketplace.aleo {
         listings.set(listing_id, new_listing_data);
         seller_credits_future.await();
     }
-    */
     
-
-    transition add_volume(
-        volume: Volume,
-        amount: u64
-    ) -> Volume {
-        assert_eq(volume.listing_program, self.caller);
-        return Volume {
-            owner: self.signer,
-            listing_program: self.caller,
-            side: volume.side,
-            amount: volume.amount + amount
-        };
-    }
-
+    
 
     transition mint_volume(
         side: bool, 
