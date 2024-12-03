@@ -1,0 +1,32 @@
+{
+  "program": "zmarket_private_marketplace.aleo",
+  "version": "0.0.0",
+  "description": "",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "name": "credits.aleo",
+      "location": "network",
+      "network": "testnet",
+      "path": null
+    },
+    {
+      "name": "nft_registry_v3.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../aleo-standard-programs/arc722/"
+    },
+    {
+      "name": "nft_collections_v3.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../aleo-standard-programs/arc722_collections/"
+    },
+    {
+      "name": "zmarket_royalties_v3.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../royalties/"
+    }
+  ]
+}

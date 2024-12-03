@@ -1,0 +1,20 @@
+{
+  "program": "zmarket_royalties_v3.aleo",
+  "version": "0.0.0",
+  "description": "",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "name": "nft_registry_v3.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../aleo-standard-programs/arc722/"
+    },
+    {
+      "name": "nft_collections_v3.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../aleo-standard-programs/arc722_collections/"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "program": "wrapped_ans_nft_v3.aleo",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "name": "nft_registry_v3.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../../aleo-standard-programs/arc722"
+    },
+    {
+      "name": "nft_records_v3.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../../aleo-standard-programs/arc722_records"
+    },
+    {
+      "name": "nft_collections_v3.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../../aleo-standard-programs/arc722_collections"
+    },
+    {
+      "name": "aleo_name_service_registry_v4.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../ans-programs/programs/registry"
+    }
+  ]
+}

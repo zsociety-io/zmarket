@@ -1,0 +1,14 @@
+{
+  "program": "nft_registry_v3.aleo",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "name": "nft_records_v3.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../arc722_records"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "program": "zmarket_batch_withdraw.aleo",
+  "version": "0.0.0",
+  "description": "",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "name": "credits.aleo",
+      "location": "network",
+      "network": "testnet",
+      "path": null
+    },
+    {
+      "name": "nft_registry_v3.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../aleo-standard-programs/arc722/"
+    },
+    {
+      "name": "zmarket_public_marketplace.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../public_marketplace/"
+    },
+    {
+      "name": "zmarket_private_marketplace.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../private_marketplace/"
+    }
+  ]
+}

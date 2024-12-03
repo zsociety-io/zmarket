@@ -1,4 +1,4 @@
-# zmarket_ans_listing_v3.aleo
+# wrapped_ans_nft_v3.aleo
 
 ## Build Guide
 

@@ -1,4 +1,4 @@
-# zmarket_ans_listing_v3.aleo
+# zmarket_public_marketplace.aleo
 
 ## Build Guide
 

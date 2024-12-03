@@ -1,38 +1,26 @@
 {
-  "program": "zmarket_ans_listing.aleo",
+  "program": "zmarket_ans_listing_v3.aleo",
   "version": "0.0.0",
   "description": "",
   "license": "MIT",
   "dependencies": [
     {
-      "name": "aleo_name_service_registry_v4.aleo",
+      "name": "zmarket_private_marketplace.aleo",
       "location": "local",
       "network": null,
-      "path": "../../../../ans-programs/programs/registry/"
+      "path": "../../private_marketplace/"
     },
     {
-      "name": "zmarket_marketplace.aleo",
+      "name": "zmarket_public_marketplace.aleo",
       "location": "local",
       "network": null,
-      "path": "../../marketplace/"
+      "path": "../../public_marketplace/"
     },
     {
-      "name": "ans_listing_royalty.aleo",
+      "name": "wrapped_ans_nft_v3.aleo",
       "location": "local",
       "network": null,
-      "path": "../../utils/ans_listing_royalty"
-    },
-    {
-      "name": "zmarket_royalty.aleo",
-      "location": "local",
-      "network": null,
-      "path": "../../utils/zmarket_royalty"
-    },
-    {
-      "name": "credits.aleo",
-      "location": "network",
-      "network": "testnet",
-      "path": null
+      "path": "../../arc721_wrappers/ans/wrapped_ans_nft"
     }
   ]
 }

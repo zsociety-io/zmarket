@@ -1,18 +1,4 @@
 [[package]]
-name = "ans_utils_v2.aleo"
-location = "local"
-path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../../../ans-programs/programs/registry/../ans_utils"
-checksum = "00f4885f073789d0340bebfd0a055d319e11509c7242bf7bba73fd955e458e72"
-dependencies = []
-
-[[package]]
-name = "aleo_name_service_registry_v4.aleo"
-location = "local"
-path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../../../ans-programs/programs/registry/"
-checksum = "9299fd350a8349ef4380eaeac9ba7d2e2050551e0562168e7f30e59cab5619c4"
-dependencies = ["ans_utils_v2.aleo"]
-
-[[package]]
 name = "credits.aleo"
 network = "testnet"
 location = "network"
@@ -20,36 +6,64 @@ checksum = "e185a49fba7f5e477c3fedf8968be9912ae7d8db34531c246041e899175e4d33"
 dependencies = []
 
 [[package]]
-name = "zmarket_marketplace.aleo"
+name = "nft_records_v3.aleo"
 location = "local"
-path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../utils/volume/"
-checksum = "42477fbb8eea17e7fea3acf88963895921185108ba9234bde66d06aac62762f7"
-dependencies = ["credits.aleo"]
-
-[[package]]
-name = "ans_authority.aleo"
-location = "local"
-path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../utils/ans_listing_royalty/../ans_authority"
-checksum = "a2baf57b98ddbdc32681d53ee82f4034e836b9213197598a371db5f88317241b"
+path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../arc721_wrappers/ans/wrapped_ans_nft/../../../aleo-standard-programs/arc722_records"
+checksum = "63334561d9ae83efd638199a6df618d6823223a94abf27bfd17d2b4e4379cc45"
 dependencies = []
 
 [[package]]
-name = "ans_listing_royalty.aleo"
+name = "nft_registry_v3.aleo"
 location = "local"
-path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../utils/ans_listing_royalty"
-checksum = "6066067ea05e4c94723032cc7536710f84bca480a4cb497a589b829f74e79dae"
-dependencies = ["ans_authority.aleo"]
+path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../arc721_wrappers/ans/wrapped_ans_nft/../../../aleo-standard-programs/arc722"
+checksum = "2732e5953f670211b6469d6e2e157bd914ea88439b7ec46b342293bb744b4e68"
+dependencies = ["nft_records_v3.aleo"]
 
 [[package]]
-name = "zmarket_authority.aleo"
+name = "nft_collections_v3.aleo"
 location = "local"
-path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../utils/zmarket_royalty/../zmarket_authority"
-checksum = "4863a50dfbdd4d4ac838e1d3a3fdd58554c7691eb4911dc641e099308b2fb017"
+path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../arc721_wrappers/ans/wrapped_ans_nft/../../../aleo-standard-programs/arc722_collections"
+checksum = "5acbb09792f010e34782c9d780562917022d11e9a0d8530a4b153cd609a6ae16"
+dependencies = ["nft_registry_v3.aleo", "nft_records_v3.aleo"]
+
+[[package]]
+name = "zmarket_royalties_v3.aleo"
+location = "local"
+path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../public_marketplace/../royalties/"
+checksum = "f4680fb266aa68abe2965fdba640259bcd186a04edcd60565d087b811a409836"
+dependencies = ["nft_registry_v3.aleo", "nft_collections_v3.aleo"]
+
+[[package]]
+name = "zmarket_private_marketplace.aleo"
+location = "local"
+path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../private_marketplace/"
+checksum = "f6df771827fdb74862511f9418e0753ef6c85ee23be32505d9f87f0d9dd3548b"
+dependencies = ["credits.aleo", "nft_registry_v3.aleo", "nft_collections_v3.aleo", "zmarket_royalties_v3.aleo"]
+
+[[package]]
+name = "zmarket_public_marketplace.aleo"
+location = "local"
+path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../public_marketplace/"
+checksum = "43e09fa2131a0cd29c7ef26319998ac81e68360116d219988c786c640e6bf331"
+dependencies = ["credits.aleo", "nft_registry_v3.aleo", "nft_collections_v3.aleo", "zmarket_royalties_v3.aleo"]
+
+[[package]]
+name = "ans_utils_v2.aleo"
+location = "local"
+path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../arc721_wrappers/ans/wrapped_ans_nft/../ans-programs/programs/registry/../ans_utils"
+checksum = "fdc7563a0898407162147e8e54d16582ef7dedf9c9b128559a96c1ec3d54e2ab"
 dependencies = []
 
 [[package]]
-name = "zmarket_royalty.aleo"
+name = "aleo_name_service_registry_v4.aleo"
 location = "local"
-path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../utils/zmarket_royalty"
-checksum = "6815e3033fa23e57c6cd2fe57e47a75dc1b37d0dbf8374d5af4109c5dabb3dea"
-dependencies = ["zmarket_authority.aleo"]
+path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../arc721_wrappers/ans/wrapped_ans_nft/../ans-programs/programs/registry"
+checksum = "617726a4d384edf7e33fbae7de42ae96cf4577d0940daf27c11f8e17d56c3782"
+dependencies = ["ans_utils_v2.aleo"]
+
+[[package]]
+name = "wrapped_ans_nft_v3.aleo"
+location = "local"
+path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../arc721_wrappers/ans/wrapped_ans_nft"
+checksum = "d633473361075f58d50834454059f16cbedcde838162afd0ff24474211469a5f"
+dependencies = ["nft_registry_v3.aleo", "nft_records_v3.aleo", "nft_collections_v3.aleo", "aleo_name_service_registry_v4.aleo"]

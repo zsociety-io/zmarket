@@ -1,4 +1,4 @@
-# zmarket_ans_listing_v3.aleo
+# nft_registry_v3.aleo
 
 ## Build Guide
 
