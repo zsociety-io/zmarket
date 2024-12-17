@@ -25,7 +25,6 @@ program nft_registry_v3.aleo {
         nft_commit: field
     }
 
-
     struct NFTContent {
         data: Data,
         edition: scalar
@@ -660,7 +659,7 @@ program nft_registry_v3.aleo {
         nft_owners.remove(nft_id_hash);
     }
 
-
+    /*
     async transition update_edition_private(
         admin_nft: nft_records_v3.aleo/NFT,
         nft: nft_records_v3.aleo/NFT,
@@ -735,6 +734,7 @@ program nft_registry_v3.aleo {
         };
         nft_ids.set(new_nft_id_hash, new_nft_id);
     }
+    */
 
 
     async transition publish_nft_content(

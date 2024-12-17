@@ -25,6 +25,3 @@ build_from_path "./programs/private_marketplace";
 build_from_path "./programs/listings/ans";
 build_from_path "./programs/batch_withdraw";
 
-
-add public marketplace
-add batch withdrawal

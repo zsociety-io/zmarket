@@ -58,7 +58,7 @@ dependencies = []
 name = "aleo_name_service_registry_v4.aleo"
 location = "local"
 path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../arc721_wrappers/ans/wrapped_ans_nft/../ans-programs/programs/registry"
-checksum = "617726a4d384edf7e33fbae7de42ae96cf4577d0940daf27c11f8e17d56c3782"
+checksum = "bf14b8940e1d9098af9c7907af88606c080cf37e2ad5467904d4a969ce6902c1"
 dependencies = ["ans_utils_v2.aleo"]
 
 [[package]]

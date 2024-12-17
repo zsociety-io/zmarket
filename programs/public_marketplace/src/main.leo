@@ -21,7 +21,7 @@ program zmarket_public_marketplace.aleo {
     }
 
     mapping listings: field => PublicTrade;
-     // listing_id => listing_data
+    // listing_id => listing_data
 
     mapping offers: field => PublicTrade;
     // offer_id => offer_data

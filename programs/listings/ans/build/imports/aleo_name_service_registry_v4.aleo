@@ -77,9 +77,9 @@ finalize initialize_collection:
     set r0[1u32] into general_settings[4u8];
     set r0[2u32] into general_settings[5u8];
     set r0[3u32] into general_settings[6u8];
-    cast aleo1sr8d93usu395zc29qcl35ul2e7hl2538hl8pehe4ms88q4g70gxq3ffw0v into r3 as field;
+    cast aleo1wamjqlka7d0gazlxdys6n8e8zeee3ymedwvw8elvh7529kwd45rq0plgax into r3 as field;
     set r3 into general_settings[7u8];
-    set 1u32 into toggle_settings[0u8];
+    set 3u32 into toggle_settings[0u8];
 
 function set_admin:
     input r0 as address.private;
@@ -188,15 +188,13 @@ finalize register:
     input r2 as field.public;
     input r3 as field.public;
     input r4 as address.public;
-    get nft_owners[r2] into r5;
-    assert.eq r4 r5;
-    contains names[r0] into r6;
-    assert.eq r6 false;
-    get toggle_settings[0u8] into r7;
-    and r7 3u32 into r8;
-    assert.eq r8 3u32;
-    cast r1 r2 r3 into r9 as NameStruct;
-    set r9 into names[r0];
+    contains names[r0] into r5;
+    assert.eq r5 false;
+    get toggle_settings[0u8] into r6;
+    and r6 3u32 into r7;
+    assert.eq r7 3u32;
+    cast r1 r2 r3 into r8 as NameStruct;
+    set r8 into names[r0];
 
 function register_private:
     input r0 as [u128; 4u32].private;
