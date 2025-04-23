@@ -1,5 +1,17 @@
 
-aleo_name_service_registry_v4.aleo
+
+
+
+snarkos developer execute \
+  --private-key $PRIVATE_KEY \
+  --query $NODE_URL \
+  --broadcast "$NODE_URL/$([[ $NETWORK == 'mainnet' ]] && echo 'mainnet' || echo 'testnet')/transaction/broadcast" \
+  --network $([[ $NETWORK == "mainnet" ]] && echo 0 || echo 1) \
+  token_registry.aleo \
+  transfer_private_to_public \
+  aleo1dsmwmtm80fxl3jef5yenfzlze9kg0ugg5r3kzqjzk0c4pg4epyfqmff4zh \
+  20000000000u128 \
+  "{ owner: aleo1dsmwmtm80fxl3jef5yenfzlze9kg0ugg5r3kzqjzk0c4pg4epyfqmff4zh.private, amount: 20000000000u128.private, token_id: 13759769624877785000field.private, external_authorization_required: false.private, authorized_until: 4294967295u32.private, _nonce: 2885070201599878126488521550499632581730794877651425363230035121817156886863group.public}"
 
 
 snarkos developer execute \
@@ -74,7 +86,7 @@ snarkos developer execute \
     ]
   },
   edition: 0scalar.private,
-  _nonce: 127356052564542066446503799909348660754356952368896997374027744575463053777group.public
+  _nonce: 6740181706182263405388484213062446107921132945420656664743798182810330727961group.public
 }" \
   aleo1wamjqlka7d0gazlxdys6n8e8zeee3ymedwvw8elvh7529kwd45rq0plgax
 
@@ -121,10 +133,19 @@ snarkos developer execute \
   initialize_marketplace \
   250u16 \
   250u16 \
-  "[0field, 0field, 0field, 0field]" \
-  "[0field, 0field, 0field, 0field]" \
+  "[3144565289251880978667903074226330800661205682396127880461755386493451793455field, 31941486054026331686211900600078520153053858615field, 0field, 0field]" \
+  "[5901222158416856528567965712374334914478123141238751990510661793728627828083field, 29050612332890824915204485114444214field, 0field, 0field]" \
   "[0field, 0field, 0field, 0field]" \
   "[0field, 0field, 0field, 0field]"
+
+#async transition initialize_marketplace(
+#    public market_fee_permyriad: u16,
+#    public royalty_col_royalty_permyriad: u16,
+#    public royalty_base_uri: [field; 4],
+#    public royalty_metadata_uri: [field; 4],
+#    public market_base_uri: [field; 4],
+#    public market_metadata_uri: [field; 4]
+#) -> Future {
 
 
 
@@ -136,7 +157,9 @@ snarkos developer execute \
   wrapped_ans_nft_v3.aleo \
   initialize \
   "[184555836509371486643729180464841087996994525386362889823339413645119811119field, 0field, 0field, 0field]" \
-  "[0field, 0field, 0field, 0field]" 
+  "[6579457258335983359855863597384440320763731473378049735637177104745392860787field, 103208507812591765127field, 0field, 0field]" 
+
+
 
 
 snarkos developer execute \
@@ -147,6 +170,12 @@ snarkos developer execute \
   zmarket_ans_listing_v3.aleo \
   initialize 
 
+list_collection_public(
+        public collection_id: field,
+        public royalty_holder: address,
+        public royalty_permyriad: u16,
+        public list_as_market_admin: bool
+    )
 
 
 snarkos developer execute \
@@ -157,7 +186,7 @@ snarkos developer execute \
   zmarket_royalties_v3.aleo \
   list_collection_public \
   123829191909212120210201field \
-  "aleo1dsmwmtm80fxl3jef5yenfzlze9kg0ugg5r3kzqjzk0c4pg4epyfqmff4zh" \
+  "aleo1wamjqlka7d0gazlxdys6n8e8zeee3ymedwvw8elvh7529kwd45rq0plgax" \
   "500u16" \
   "true"
 

@@ -363,7 +363,7 @@ finalize unoffer_public:
     set r5 into offers[r0];
 
 function update_public_offer:
-    input r0 as field.private;
+    input r0 as field.public;
     input r1 as u64.public;
     async update_public_offer r0 r1 self.caller into r2;
     output r2 as zmarket_public_marketplace.aleo/update_public_offer.future;

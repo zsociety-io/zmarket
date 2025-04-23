@@ -463,7 +463,6 @@ program nft_registry_v3.aleo {
             nft_records_v3.aleo/mint_nft_view(
                 recipient, nft_data, nft_edition
             );
-
         let nft_id_hash: field = hash_nft_id(collection_id, nft_data, nft_edition);
         let transfer_public_as_signer_future: Future = fin_transfer_public_as_signer(
              recipient, nft_id_hash, self.signer,

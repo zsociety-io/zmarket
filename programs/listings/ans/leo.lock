@@ -16,7 +16,7 @@ dependencies = []
 name = "nft_registry_v3.aleo"
 location = "local"
 path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../arc721_wrappers/ans/wrapped_ans_nft/../../../aleo-standard-programs/arc722"
-checksum = "2732e5953f670211b6469d6e2e157bd914ea88439b7ec46b342293bb744b4e68"
+checksum = "0dd4dee38aab1db1ad190455d7cdd29e15a2a92995031ece0ccc12b9fe44c2ca"
 dependencies = ["nft_records_v3.aleo"]
 
 [[package]]
@@ -44,7 +44,7 @@ dependencies = ["credits.aleo", "nft_registry_v3.aleo", "nft_collections_v3.aleo
 name = "zmarket_public_marketplace.aleo"
 location = "local"
 path = "/Users/palong/bandersnatch/projects/zmarket/programs/listings/ans/../../public_marketplace/"
-checksum = "43e09fa2131a0cd29c7ef26319998ac81e68360116d219988c786c640e6bf331"
+checksum = "a005b31442fbc985c9c0c93c0426df7f44d1d6c37f60d63e4a5b61f4cfd0698b"
 dependencies = ["credits.aleo", "nft_registry_v3.aleo", "nft_collections_v3.aleo", "zmarket_royalties_v3.aleo"]
 
 [[package]]

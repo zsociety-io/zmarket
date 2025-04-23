@@ -38,10 +38,7 @@ program wrapped_ans_nft_v3.aleo {
     }
 
 
-    async transition withdraw_admin(
-        public base_uri: [field; 4],
-        public metadata_uri: [field; 4]
-    ) -> (nft_records_v3.aleo/NFT, Future) {
+    async transition withdraw_admin() -> (nft_records_v3.aleo/NFT, Future) {
         let (transfer_admin_nft, transfer_admin_nft_future): (
             nft_records_v3.aleo/NFT, Future
         ) = nft_registry_v3.aleo/transfer_public_to_private(

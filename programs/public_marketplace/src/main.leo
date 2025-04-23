@@ -578,7 +578,7 @@ program zmarket_public_marketplace.aleo {
 
 
     async transition update_public_offer(
-        offer_id: field,
+        public offer_id: field,
         public new_price: u64,
     ) -> Future {
         let update_public_offer_future: Future = finalize_update_public_offer(
